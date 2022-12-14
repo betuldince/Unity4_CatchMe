@@ -9,8 +9,9 @@ public class SpawnManager : MonoBehaviour
     public GameObject powerUp;
     private float spawnRange=9;
     private int WaveNum=1;
-    private int remainingEnemy;
+    public int remainingEnemy;
 
+     
     void Start()
     {
         EnemySpawner(WaveNum);
@@ -21,12 +22,13 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         remainingEnemy = GameObject.FindObjectsOfType<Enemy>().Length;
-        if (remainingEnemy == 0)
+        if (remainingEnemy == 0 && GameManager.Instance.gameOver == false)
         {
             WaveNum++;
             EnemySpawner(WaveNum);
             Instantiate(powerUp, RandomPosition(), Quaternion.identity);
         }
+ 
     }
     private Vector3 RandomPosition()
     {
